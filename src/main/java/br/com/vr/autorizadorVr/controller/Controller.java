@@ -9,10 +9,7 @@ import br.com.vr.autorizadorVr.servico.Servico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
@@ -27,7 +24,7 @@ public class Controller {
     }
 
     @PostMapping("/cartoes")
-    public ResponseEntity criarCartao(Cartao cartao){
+    public ResponseEntity criarCartao(@RequestBody Cartao cartao){
         ResponseEntity resposta = null;
         try{
             servico.criarCartao(cartao);
@@ -41,7 +38,7 @@ public class Controller {
     }
 
     @GetMapping("/cartoes/{numeroCartao}")
-    public ResponseEntity obterSaldo(@PathVariable String numeroCartao){
+    public ResponseEntity obterSaldo(String numeroCartao){
         ResponseEntity resposta = null;
         try{
             BigDecimal saldo = servico.obterSaldo(numeroCartao);
@@ -53,7 +50,7 @@ public class Controller {
     }
 
     @PostMapping("/transacoes")
-    public ResponseEntity realizarTransacao(Transacao transacao){
+    public ResponseEntity realizarTransacao(@RequestBody Transacao transacao){
         ResponseEntity resposta = null;
         try{
             servico.realizarTransacao(transacao);
